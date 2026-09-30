@@ -1,0 +1,4 @@
+/* Geist (sans + mono), same files as the desktop app (copied by tools/sync-web.sh). */
+@font-face { font-family: "Geist"; font-weight: 400; font-display: swap; src: url("../fonts/Geist-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Geist"; font-weight: 700; font-display: swap; src: url("../fonts/Geist-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Geist Mono"; font-weight: 400; font-display: swap; src: url("../fonts/GeistMono-Regular.ttf") format("truetype"); }

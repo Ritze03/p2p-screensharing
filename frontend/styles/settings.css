@@ -1,0 +1,105 @@
+/*
+ * settings.css — Settings tab: a stack of one-concern cards (DISPLAY NAME,
+ * TURN), each with its own micro-caps heading and, where a control needs
+ * explaining, a paragraph of prose under it — plus a closing info card. See
+ * settings.js's `render()`.
+ */
+
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+}
+
+/* Display name text field — fixed 260px so it doesn't stretch full
+   card-width like a generic `.field-input`. */
+.settings-name-input {
+  width: 260px;
+}
+
+/* One labelled field in the TURN card. Label above, control below; the
+   controls share the same 260px column as the display name field, except the
+   URL which is wider (TURN URLs are long). */
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.settings-turn-card .field-input {
+  width: 100%;
+  max-width: 360px;
+}
+
+.settings-turn-card .field-label {
+  margin: 0;
+}
+
+/* Password input with its show/hide button sitting inside the field's right
+   edge. */
+.settings-password-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+.settings-password-wrap .field-input {
+  padding-right: 36px;
+}
+
+.settings-reveal-btn {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.settings-save-status {
+  font-size: 11px;
+  color: var(--success);
+}
+
+.settings-save-status-error {
+  color: var(--danger);
+}
+
+/* Explanatory prose under a control. */
+.settings-blurb {
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.65;
+  color: var(--text-faint);
+}
+
+/* Info/about card — sits a tier BELOW a normal card (sunken fill, muted
+   border), so it reads as a footnote to the stack rather than a setting. */
+.settings-about {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: var(--elevation-16);
+  border-color: var(--inset-border);
+}
+
+.settings-about-icon {
+  flex: 0 0 auto;
+  font-size: 18px;
+  color: var(--text-faint);
+  font-variation-settings: "wght" 300;
+}
+
+.settings-about-text {
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--text-faint);
+}

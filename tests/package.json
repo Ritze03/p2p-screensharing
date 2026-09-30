@@ -1,0 +1,15 @@
+{
+  "name": "p2p-screensharing-tests",
+  "private": true,
+  "version": "0.1.0",
+  "description": "End-to-end tests for the serverless P2P screensharing Electron app (drives the real electron/main.js with Playwright).",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "cd ../frontend/p2p && node --test",
+    "test:e2e": "bash headless/run.sh playwright test",
+    "test:display": "P2P_E2E_DISPLAY=real playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.0"
+  }
+}

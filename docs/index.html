@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src wss:; media-src 'self' blob: mediastream:; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P2P Screensharing</title>
+  <link rel="icon" href="assets/mark-32.png" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/fonts.css" />
+  <link rel="stylesheet" href="styles/app.css" />
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="assets/mark-32.png" alt="" width="28" height="28" /><h1>P2P Screensharing</h1></div>
+    <button class="btn btn-secondary" id="settings-btn" type="button">Settings</button>
+  </header>
+
+  <div class="banner banner-warn" id="env-note" hidden></div>
+  <div class="banner banner-err" id="msg" role="alert" hidden></div>
+
+  <div class="layout">
+    <aside class="side">
+      <section class="card" aria-label="Rooms">
+        <h2 class="card-label">Rooms</h2>
+        <form id="join-form" class="row" autocomplete="off">
+          <input class="field-input mono grow" id="join-code" placeholder="Paste a share code" spellcheck="false" aria-label="Share code" />
+          <button class="btn btn-primary" type="submit">Join</button>
+        </form>
+        <form id="create-form" class="row" autocomplete="off">
+          <input class="field-input grow" id="create-name" placeholder="New room name (optional)" maxlength="60" aria-label="Room name" />
+          <button class="btn btn-secondary" type="submit">Create room</button>
+        </form>
+        <div class="chips" id="rooms-list"></div>
+      </section>
+
+      <section class="card" id="room-card" aria-label="Room" hidden>
+        <div class="room-head">
+          <h2 class="room-title" id="room-title"></h2>
+          <span class="pill" id="room-state"></span>
+        </div>
+        <input class="field-input mono share-code-input" id="room-code" readonly aria-label="Share code of this room" />
+        <div class="room-error" id="room-error" hidden></div>
+        <div class="unreachable" id="unreachable" role="button" tabindex="0" title="Open Settings" hidden></div>
+        <div class="row"><button class="btn btn-secondary" id="copy-code" type="button">Copy code</button><span id="room-actions" class="row"></span></div>
+
+        <h3 class="sub">Members</h3>
+        <ul class="list" id="members"></ul>
+
+        <h3 class="sub">Streams in this room</h3>
+        <ul class="list" id="streams"></ul>
+        <p class="hint" id="streams-empty">Nobody else is sharing right now.</p>
+
+        <div id="share-panel" hidden>
+          <h3 class="sub">Share your screen</h3>
+          <div class="share-grid">
+            <span class="field-label">Frame rate</span>
+            <div class="seg" id="fps-seg" role="group" aria-label="Frame rate"></div>
+            <span class="field-label">Bitrate</span>
+            <div class="row"><input type="range" id="bitrate" min="500" max="20000" step="500" value="8000" aria-label="Bitrate" /><span class="mono" id="bitrate-val"></span></div>
+            <span class="field-label">Priority</span>
+            <select class="field-input" id="preset" aria-label="Priority">
+              <option value="low_latency">Smooth motion</option>
+              <option value="balanced">Balanced</option>
+              <option value="quality">Sharp text</option>
+            </select>
+            <span class="field-label" id="codec-label">Codec</span>
+            <select class="field-input" id="codec" aria-label="Codec"></select>
+          </div>
+          <label class="check" id="audio-row"><input type="checkbox" id="audio" checked /> Include audio when the browser offers it</label>
+          <button class="btn btn-primary wide" id="share-btn" type="button">Share screen</button>
+          <p class="hint" id="share-hint"></p>
+          <ul class="list" id="my-shares"></ul>
+        </div>
+      </section>
+    </aside>
+
+    <main class="stage">
+      <div class="tiles" id="tiles"></div>
+      <p class="empty" id="tiles-empty">Join or create a room, then press Watch on a stream to see it here.</p>
+    </main>
+  </div>
+
+  <dialog id="settings-dlg">
+    <form method="dialog" id="settings-form" class="dlg">
+      <h2 class="card-label">Settings</h2>
+      <label class="field-label" for="set-name">Display name</label>
+      <input class="field-input" id="set-name" maxlength="40" placeholder="e.g. mo" autocomplete="off" />
+      <h3 class="sub">TURN relay (optional)</h3>
+      <label class="field-label" for="set-url">URL</label>
+      <input class="field-input mono" id="set-url" placeholder="turn:turn.example.com:3478" spellcheck="false" autocomplete="off" />
+      <label class="field-label" for="set-user">Username</label>
+      <input class="field-input" id="set-user" spellcheck="false" autocomplete="off" />
+      <label class="field-label" for="set-pass">Password</label>
+      <input class="field-input" id="set-pass" type="password" spellcheck="false" autocomplete="new-password" />
+      <p class="hint">Only needed if peers cannot connect directly. Leave empty for direct P2P. TURN changes apply after you leave all rooms or reload the page.</p>
+      <p class="settings-status" id="set-status" role="status"></p>
+      <div class="row end">
+        <button class="btn btn-secondary" id="set-close" type="button">Close</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

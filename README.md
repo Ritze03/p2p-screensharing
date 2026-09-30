@@ -11,6 +11,10 @@ cd electron && npm install && npm start     # run the app
 npm run build:appimage                      # (in electron/) build the AppImage into electron/dist
 ```
 
+```sh
+./launch.sh    # installs dependencies on first run, then starts the app
+```
+
 ## Tests
 
 ```sh

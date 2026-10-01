@@ -1,3 +1,5 @@
+**Web client:** https://ritze03.github.io/p2p-screensharing/index.html
+
 # P2P Screensharing
 
 A serverless peer-to-peer screensharing desktop app (Electron + WebRTC via Trystero). Rooms are joined with a single

@@ -6,6 +6,9 @@ A serverless peer-to-peer screensharing desktop app (Electron + WebRTC via Tryst
 share code; signalling is end-to-end encrypted with a password derived from that code. On Linux, H.264 encoding is
 hardware-accelerated through VA-API.
 
+> [!WARNING]
+> This project is at a very early stage and should be viewed as a demo, not production-ready software. Expect bugs, missing features, and breaking changes.
+
 ## Run / build
 
 ```sh
